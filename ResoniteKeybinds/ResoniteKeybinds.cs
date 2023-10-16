@@ -15,6 +15,7 @@ namespace ResoniteKeybinds {
         public override string Version => "1.0.0";
         public override string Link => "https://github.com/LualtOfficial/ResoniteKeybinds";
     
+        // Movement
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> KEY_FORWARD = new ModConfigurationKey<Key>("keyForwad", "Forward", () => Key.W);
         [AutoRegisterConfigKey]
@@ -23,26 +24,19 @@ namespace ResoniteKeybinds {
         private static readonly ModConfigurationKey<Key> KEY_LEFT = new ModConfigurationKey<Key>("keyLeft", "Left", () => Key.A);
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> KEY_RIGHT = new ModConfigurationKey<Key>("keyRight", "Right", () => Key.D);
-        
-        [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER1 = new ModConfigurationKey<dummy>(" ", "");
-        
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> KEY_SPRINT = new ModConfigurationKey<Key>("keySprint", "Sprint", () => Key.Shift);
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> KEY_SLOW = new ModConfigurationKey<Key>("keySlow", "Slow", () => Key.Z);
-        
-        [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER2 = new ModConfigurationKey<dummy>("  ", "");
-        
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> KEY_JUMP = new ModConfigurationKey<Key>("keyJump", "Jump", () => Key.Space);
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> KEY_CROUCH = new ModConfigurationKey<Key>("keyCrouch", "Crouch", () => Key.C);
         
         [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER3 = new ModConfigurationKey<dummy>("   ", "");
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER1 = new ModConfigurationKey<dummy>(" ", "");
 
+        // Interactions
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<MouseButton> INTERACTION_INTERACT = new ModConfigurationKey<MouseButton>("interactionInteract", "Interact", () => MouseButton.Left);
         [AutoRegisterConfigKey]
@@ -58,9 +52,132 @@ namespace ResoniteKeybinds {
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<MouseButton> INTERACTION_FOCUS_UI = new ModConfigurationKey<MouseButton>("interactionFocusUI", "Focus UI", () => MouseButton.Left);
         [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<Key> INTERACTION_FOCUS_UI_GATE = new ModConfigurationKey<Key>("interactionFocusUIGate", "Focus UI Gate", () => Key.Control);
+        private static readonly ModConfigurationKey<Key> INTERACTION_FOCUS_UI_GATE = new ModConfigurationKey<Key>("interactionFocusUIGate", "Focus UI (gate)", () => Key.Control);
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> INTERACTION_TOGGLE_EDIT_MODE = new ModConfigurationKey<Key>("interactionToggleEditMode", "Toggle Edit Mode", () => Key.F2);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER2 = new ModConfigurationKey<dummy>("  ", "");
+
+        // Clipboard
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> CLIPBOARD_PASTE = new ModConfigurationKey<Key>("clipboardPaste", "Paste", () => Key.V);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> CLIPBOARD_PASTE_GATE = new ModConfigurationKey<Key>("clipboardPasteGate", "Paste (gate)", () => Key.Control);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER3 = new ModConfigurationKey<dummy>("   ", "");
+
+        // Photo
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> PHOTO_TAKE = new ModConfigurationKey<Key>("photoTake", "Take Photo", () => Key.Print);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> PHOTO_TAKE_GATE = new ModConfigurationKey<Key>("photoTakeGate", "Take Photo (gate)", () => Key.Shift);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> PHOTO_TIMER = new ModConfigurationKey<Key>("photoTimer", "Start Timer Photo", () => Key.Print);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> PHOTO_TIMER_GATE = new ModConfigurationKey<Key>("photoTimerGate", "Start Timer Photo (gate)", () => Key.Control);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER4 = new ModConfigurationKey<dummy>("    ", "");
+
+        // Laser
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<MouseButton> LASER_ALIGN = new ModConfigurationKey<MouseButton>("laserAlign", "Laser Hold Align", () => MouseButton.Left);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> LASER_ROTATE = new ModConfigurationKey<Key>("laserRotate", "Laser Hold Rotate", () => Key.E);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> LASER_ROTATE_GATE = new ModConfigurationKey<Key>("laserRotateGate", "Laser Hold Rotate (gate)", () => Key.Shift);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> LASER_FREEZE = new ModConfigurationKey<Key>("laserFreeze", "Laser Hold Freeze Cursor", () => Key.E);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> LASER_SCALE = new ModConfigurationKey<Key>("laserScale", "Laser Hold Scale", () => Key.Shift);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER5 = new ModConfigurationKey<dummy>("     ", "");
+
+        // Global
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> GLOBAL_DASH = new ModConfigurationKey<Key>("globalDash", "Toggle Dashboard", () => Key.Escape);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> GLOBAL_TALK_KEYBOARD = new ModConfigurationKey<Key>("globalTalkKeyboard", "Talk (keyboard)", () => Key.V);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> GLOBAL_TALK_KEYBOARD_GATE = new ModConfigurationKey<Key>("globalTalkKeyboardGate", "Talk (keyboard gate", () => Key.Control);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<MouseButton> GLOBAL_TALK_MOUSE = new ModConfigurationKey<MouseButton>("globalTalkMouse", "Talk (mouse)", () => MouseButton.Button5);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> GLOBAL_MUTE = new ModConfigurationKey<Key>("globalMute", "Toggle Mute", () => Key.M);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER6 = new ModConfigurationKey<dummy>("      ", "");
+
+        // Undo
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> UNDO_UNDO = new ModConfigurationKey<Key>("undoUndo", "Undo", () => Key.Z);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> UNDO_UNDO_GATE = new ModConfigurationKey<Key>("undoUndoGate", "Undo (gate)", () => Key.Control);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> UNDO_REDO = new ModConfigurationKey<Key>("undoRedo", "Redo", () => Key.Y);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> UNDO_REDO_GATE = new ModConfigurationKey<Key>("undoRedoGate", "Redo (gate)", () => Key.Control);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER7 = new ModConfigurationKey<dummy>("       ", "");
+
+        // Screen
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> SCREEN_PRESPECTIVE = new ModConfigurationKey<Key>("screenPerspective", "Toggle Perspective", () => Key.F5);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> SCREEN_FREEFORM = new ModConfigurationKey<Key>("screenFreeform", "Toggle Freeform Camera", () => Key.F6);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> SCREEN_FOCUS = new ModConfigurationKey<Key>("screenFocus", "Focus", () => Key.F);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> SCREEN_FOCUS_GATE = new ModConfigurationKey<Key>("screenFocusGate", "Focus (gate)", () => Key.Control);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> SCREEN_UNFOCUS = new ModConfigurationKey<Key>("screeUnfocus", "Unfocus", () => Key.F);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> SCREEN_UNFOCUS_GATE = new ModConfigurationKey<Key>("screenUnfocusGate", "Unfocus (gate)", () => Key.Alt);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER8 = new ModConfigurationKey<dummy>("        ", "");
+
+        // Head (so many controls oml, also hi :3)
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> HEAD_CROUCH = new ModConfigurationKey<Key>("headCrouch", "Crouch", () => Key.C);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER9 = new ModConfigurationKey<dummy>("         ", "");
+
+        // General Locomotion
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> GENERAL_LOCOMOTION_NEXT = new ModConfigurationKey<Key>("generalLocomotionNext", "Next Module", () => Key.PageUp);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> GENERAL_LOCOMOTION_PREVIOUS = new ModConfigurationKey<Key>("generalLocomotionPrevious", "Previous Module", () => Key.PageDown);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER10 = new ModConfigurationKey<dummy>("          ", "");
+
+        // Smooth Locomotion
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> SMOOTH_LOCOMOTION_JUMP = new ModConfigurationKey<Key>("smoothLocomotionJump", "Jump", () => Key.Space);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER11 = new ModConfigurationKey<dummy>("           ", "");
+
+        // Anchor Locomotion
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> ANCHOR_LOCOMOTION_SECONDARY = new ModConfigurationKey<Key>("ancholLocomotionSecondary", "Anchor Lomocotion Secondary Action", () => Key.RightControl);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> ANCHOR_LOCOMOTION_SECNONDARY_AXIS = new ModConfigurationKey<Key>("ancholLocomotionSecondaryAxis", "Anchor Lomocotion Secondary Axis", () => Key.UpArrow);
+
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER12 = new ModConfigurationKey<dummy>("            ", "");
+
+        // Dev Tool
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> DEV_TOOL_FOCUS = new ModConfigurationKey<Key>("devToolFocus", "Dev Tool Focus", () => Key.F);
+        [AutoRegisterConfigKey]
+        private static readonly ModConfigurationKey<Key> DEV_TOOL_INSPECTOR = new ModConfigurationKey<Key>("devToolInspector", "Dev Tool Inspector", () => Key.I);
 
         private static ModConfiguration Config;
         

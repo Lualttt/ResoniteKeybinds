@@ -87,10 +87,6 @@ namespace ResoniteKeybinds {
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> LASER_ROTATE = new ModConfigurationKey<Key>("laserRotate", "Laser Hold Rotate", () => Key.E);
         [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<Key> LASER_ROTATE_GATE = new ModConfigurationKey<Key>("laserRotateGate", "Laser Hold Rotate (gate)", () => Key.Shift);
-        [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<Key> LASER_FREEZE = new ModConfigurationKey<Key>("laserFreeze", "Laser Hold Freeze Cursor", () => Key.E);
-        [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> LASER_SCALE = new ModConfigurationKey<Key>("laserScale", "Laser Hold Scale", () => Key.Shift);
 
         [AutoRegisterConfigKey]
@@ -102,7 +98,7 @@ namespace ResoniteKeybinds {
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> GLOBAL_TALK_KEYBOARD = new ModConfigurationKey<Key>("globalTalkKeyboard", "Talk (keyboard)", () => Key.V);
         [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<Key> GLOBAL_TALK_KEYBOARD_GATE = new ModConfigurationKey<Key>("globalTalkKeyboardGate", "Talk (keyboard gate", () => Key.Control);
+        private static readonly ModConfigurationKey<Key> GLOBAL_TALK_KEYBOARD_GATE = new ModConfigurationKey<Key>("globalTalkKeyboardGate", "Talk (keyboard gate)", () => Key.Control);
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<MouseButton> GLOBAL_TALK_MOUSE = new ModConfigurationKey<MouseButton>("globalTalkMouse", "Talk (mouse)", () => MouseButton.Button5);
         [AutoRegisterConfigKey]
@@ -167,8 +163,6 @@ namespace ResoniteKeybinds {
         // Anchor Locomotion
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> ANCHOR_LOCOMOTION_SECONDARY = new ModConfigurationKey<Key>("ancholLocomotionSecondary", "Anchor Lomocotion Secondary Action", () => Key.RightControl);
-        [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<Key> ANCHOR_LOCOMOTION_SECNONDARY_AXIS = new ModConfigurationKey<Key>("ancholLocomotionSecondaryAxis", "Anchor Lomocotion Secondary Axis", () => Key.UpArrow);
 
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<dummy> DUMMY_SPACER12 = new ModConfigurationKey<dummy>("            ", "");
@@ -260,68 +254,56 @@ namespace ResoniteKeybinds {
                         ClipboardInputs clipboardInputs = group as ClipboardInputs;
                         if (clipboardInputs != null)
                         {
-                            clipboardInputs.Paste.AddBinding(InputNode.Key(Key.V).Gate(InputNode.Key(Key.Control), true, false), null, null, 0);
+                            clipboardInputs.Paste.AddBinding(InputNode.Key(Config.GetValue(CLIPBOARD_PASTE)).Gate(InputNode.Key(Config.GetValue(CLIPBOARD_PASTE_GATE)), true, false), null, null, 0);
                             return;
                         }
 
                         PhotoInputs photoInputs = group as PhotoInputs;
                         if (photoInputs != null)
                         {
-                            photoInputs.TakePhoto.AddBinding(InputNode.Key(Key.Print).Gate(InputNode.Key(Key.Shift), true, false), null, null, 0);
-                            photoInputs.StartTimerPhoto.AddBinding(InputNode.Key(Key.Print).Gate(InputNode.Key(Key.Control), true, false), null, null, 0);
-                            photoInputs.TakePhoto.AddBinding(InputNode.Key(Key.P).Gate(InputNode.Key(Key.Shift), true, false), null, null, 0);
-                            photoInputs.StartTimerPhoto.AddBinding(InputNode.Key(Key.P).Gate(InputNode.Key(Key.Control), true, false), null, null, 0);
+                            photoInputs.TakePhoto.AddBinding(InputNode.Key(Config.GetValue(PHOTO_TAKE)).Gate(InputNode.Key(Config.GetValue(PHOTO_TAKE_GATE)), true, false), null, null, 0);
+                            photoInputs.StartTimerPhoto.AddBinding(InputNode.Key(Config.GetValue(PHOTO_TIMER)).Gate(InputNode.Key(Config.GetValue(PHOTO_TIMER_GATE)), true, false), null, null, 0);
                             return;
                         }
 
                         LaserHoldInputs laserHoldInputs = group as LaserHoldInputs;
                         if (laserHoldInputs != null)
                         {
-                            laserHoldInputs.Align.AddBinding(InputNode.PrimarySecondary<bool>(InputNode.MouseButton(MouseButton.Left), null), null, null, 0);
+                            laserHoldInputs.Align.AddBinding(InputNode.PrimarySecondary<bool>(InputNode.MouseButton(Config.GetValue(LASER_ALIGN)), null), null, null, 0);
                             laserHoldInputs.Slide.AddBinding(InputNode.PrimarySecondary<float>(InputNode.MouseScroll(true).Y().Multiply(InputNode.Setting<float>("Input.Screen.MouseGrabSensitivity", 15f)), null), null, null, 0);
                             laserHoldInputs.Rotate.AddBinding(InputNode.PrimarySecondary<float>(InputNode.MouseScroll(true).X().Multiply(InputNode.Setting<float>("Input.Screen.MouseGrabSensitivity", 15f)), null), null, null, 0);
-                            laserHoldInputs.Rotate.AddBinding(InputNode.PrimarySecondary<float>(InputNode.MouseMovement(true).Multiply(InputNode.Setting<float>("Input.Screen.MouseRotateSensitivity", 45f)).X().Gate(InputNode.All(new IInputNode<bool>[]
-                            {
-                                InputNode.Key(Key.Shift),
-                                InputNode.Key(Key.E)
-                            }), true, false), null), null, null, 0);
-
-                            laserHoldInputs.FreeformRotateDelta.AddBinding(InputNode.PrimarySecondary<float3>(InputNode.XYZ(InputNode.MouseMovement(true).YX().Multiply(new float2(1f, -1f)).Multiply(InputNode.Setting<float>("Input.Screen.MouseFreeformRotateSensitivity", 360f)).Gate(InputNode.All(new IInputNode<bool>[]
-                            {
-                                InputNode.Key(Key.Shift).Invert(),
-                                InputNode.Key(Key.E)
-                            }), true, false), null, true), null), null, null, 0);
-
-                            laserHoldInputs.FreezeCursor.AddBinding(InputNode.PrimarySecondary<bool>(InputNode.Key(Key.E), null), null, null, 0);
-                            laserHoldInputs.ScaleDelta.AddBinding(InputNode.PrimarySecondary<float>(InputNode.MouseScroll(true).Y().Gate(InputNode.Key(Key.Shift), true, false), null), null, null, 10);
+                            laserHoldInputs.Rotate.AddBinding(InputNode.PrimarySecondary<float>(InputNode.MouseMovement(true).Multiply(InputNode.Setting<float>("Input.Screen.MouseRotateSensitivity", 45f)).X().Gate(InputNode.Key(Config.GetValue(LASER_ROTATE))), null), null, null, 0);
+                            laserHoldInputs.FreeformRotateDelta.AddBinding(InputNode.PrimarySecondary<float3>(InputNode.XYZ(InputNode.MouseMovement(true).YX().Multiply(new float2(1f, -1f)).Multiply(InputNode.Setting<float>("Input.Screen.MouseFreeformRotateSensitivity", 360f)).Gate(InputNode.Key(Config.GetValue(LASER_ROTATE)), true, false), null, true), null), null, null, 0);
+                            laserHoldInputs.FreezeCursor.AddBinding(InputNode.PrimarySecondary<bool>(InputNode.Key(Config.GetValue(LASER_ROTATE)), null), null, null, 0);
+                            laserHoldInputs.ScaleDelta.AddBinding(InputNode.PrimarySecondary<float>(InputNode.MouseScroll(true).Y().Gate(InputNode.Key(Config.GetValue(LASER_SCALE)), true, false), null), null, null, 10);
                             return;
                         }
 
                         GlobalActions globalActions = group as GlobalActions;
                         if (globalActions != null)
                         {
-                            globalActions.ToggleDash.AddBinding(InputNode.Key(Key.Escape), null, null, 0);
-                            globalActions.ActivateTalk.AddBinding(InputNode.Key(Key.V).Gate(InputNode.Key(Key.Control).Invert(), true, false), null, null, 0);
-                            globalActions.ActivateTalk.AddBinding(InputNode.MouseButton(MouseButton.Button5), null, null, 0);
-                            globalActions.ToggleMute.AddBinding(InputNode.Key(Key.M), null, null, 0);
+                            globalActions.ToggleDash.AddBinding(InputNode.Key(Config.GetValue(GLOBAL_DASH)), null, null, 0);
+                            globalActions.ActivateTalk.AddBinding(InputNode.Key(Config.GetValue(GLOBAL_TALK_KEYBOARD)).Gate(InputNode.Key(Config.GetValue(GLOBAL_TALK_KEYBOARD_GATE)).Invert(), true, false), null, null, 0);
+                            globalActions.ActivateTalk.AddBinding(InputNode.MouseButton(Config.GetValue(GLOBAL_TALK_MOUSE)), null, null, 0);
+                            globalActions.ToggleMute.AddBinding(InputNode.Key(Config.GetValue(GLOBAL_MUTE)), null, null, 0);
                             return;
                         }
 
                         UndoInputs undoInputs = group as UndoInputs;
                         if (undoInputs != null)
                         {
-                            undoInputs.Undo.AddBinding(InputNode.Key(Key.Z).Gate(InputNode.Key(Key.Control), true, false), null, null, 0);
-                            undoInputs.Redo.AddBinding(InputNode.Key(Key.Y).Gate(InputNode.Key(Key.Control), true, false), null, null, 0);
+                            undoInputs.Undo.AddBinding(InputNode.Key(Config.GetValue(UNDO_UNDO)).Gate(InputNode.Key(Config.GetValue(UNDO_UNDO_GATE)), true, false), null, null, 0);
+                            undoInputs.Redo.AddBinding(InputNode.Key(Config.GetValue(UNDO_REDO)).Gate(InputNode.Key(Config.GetValue(UNDO_REDO_GATE)), true, false), null, null, 0);
                             return;
                         }
 
                         ScreenInputs screenInputs = group as ScreenInputs;
                         if (screenInputs != null)
                         {
-                            screenInputs.ToggleFirstAndThirdPerson.AddBinding(InputNode.Key(Key.F5), null, null, 0);
-                            screenInputs.ToggleFreeformCamera.AddBinding(InputNode.Key(Key.F6), null, null, 0);
-                            screenInputs.Focus.AddBinding(InputNode.Key(Key.F).Gate(InputNode.Key(Key.Control), true, false), null, null, 0);
-                            screenInputs.Unfocus.AddBinding(InputNode.Key(Key.F).Gate(InputNode.Key(Key.Alt), true, false), null, null, 0);
+                           screenInputs.ToggleFirstAndThirdPerson.AddBinding(InputNode.Key(Config.GetValue(SCREEN_PRESPECTIVE)), null, null, 0);
+                           screenInputs.ToggleFreeformCamera.AddBinding(InputNode.Key(Config.GetValue(SCREEN_FREEFORM)), null, null, 0);
+                           screenInputs.Focus.AddBinding(InputNode.Key(Config.GetValue(SCREEN_FOCUS)).Gate(InputNode.Key(Config.GetValue(SCREEN_FOCUS_GATE)), true, false), null, null, 0);
+                           screenInputs.Unfocus.AddBinding(InputNode.Key(Config.GetValue(SCREEN_UNFOCUS)).Gate(InputNode.Key(Config.GetValue(SCREEN_UNFOCUS_GATE)), true, false), null, null, 0);
                             return;
                         }
 
@@ -381,8 +363,8 @@ namespace ResoniteKeybinds {
                         {
                             headInputs.Crouch.AddBinding(InputNode.Any(new IInputNode<bool>[]
                             {
-                                InputNode.Key(Key.C),
-                                InputNode.Key(Key.C).TapToggle(0.15f)
+                               InputNode.Key(Config.GetValue(HEAD_CROUCH)),
+                               InputNode.Key(Config.GetValue(HEAD_CROUCH)).TapToggle(0.15f)
                             }).ToAnalog(4f, CurvePreset.Smooth), null, null, 0);
                             return;
                         }
@@ -391,8 +373,8 @@ namespace ResoniteKeybinds {
                         if (generalLocomotionInputs != null)
                         {
                             generalLocomotionInputs.SelfScaleDelta.AddBinding(InputNode.MouseScroll(true).Y().Gate(InputNode.Key(Key.Control), true, false), null, null, 0);
-                            generalLocomotionInputs.NextModule.AddBinding(InputNode.Key(Key.PageUp), null, null, 0);
-                            generalLocomotionInputs.PreviousModule.AddBinding(InputNode.Key(Key.PageDown), null, null, 0);
+                            generalLocomotionInputs.NextModule.AddBinding(InputNode.Key(Config.GetValue(GENERAL_LOCOMOTION_NEXT)), null, null, 0);
+                            generalLocomotionInputs.PreviousModule.AddBinding(InputNode.Key(Config.GetValue(GENERAL_LOCOMOTION_PREVIOUS)), null, null, 0);
                             return;
                         }
 
@@ -400,7 +382,7 @@ namespace ResoniteKeybinds {
                         if (smoothLocomotionInputs != null)
                         {
                             smoothLocomotionInputs.Move.AddBinding(ResoniteKeybinds.GenerateScreenLocomotionDirection(null, null, null), null, null, 0);
-                            smoothLocomotionInputs.Jump.AddBinding(InputNode.Key(Key.Space), null, null, 0);
+                            smoothLocomotionInputs.Jump.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)), null, null, 0);
                             return;
                         }
 
@@ -408,24 +390,24 @@ namespace ResoniteKeybinds {
                         if (smoothThreeAxisLocomotionInputs != null)
                         {
                             smoothThreeAxisLocomotionInputs.Move.AddBinding(ResoniteKeybinds.GenerateScreenLocomotionDirection(null, null, null), null, null, 0);
-                            smoothThreeAxisLocomotionInputs.Jump.AddBinding(InputNode.Key(Key.Space), null, null, 0);
+                            smoothThreeAxisLocomotionInputs.Jump.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)), null, null, 0);
                             return;
                         }
 
                         AnchorReleaseInputs anchorReleaseInputs = group as AnchorReleaseInputs;
                         if (anchorReleaseInputs != null)
                         {
-                            anchorReleaseInputs.Release.AddBinding(InputNode.Key(Key.Space), null, null, 0);
-                            anchorReleaseInputs.ReleaseStrength.AddBinding(InputNode.Key(Key.Space).ToAnalog(4f, CurvePreset.Smooth), null, null, 0);
+                            anchorReleaseInputs.Release.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)), null, null, 0);
+                            anchorReleaseInputs.ReleaseStrength.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)).ToAnalog(4f, CurvePreset.Smooth), null, null, 0);
                             return;
                         }
 
                         AnchorLocomotionInputs anchorLocomotionInputs = group as AnchorLocomotionInputs;
                         if (anchorLocomotionInputs != null)
                         {
-                            anchorLocomotionInputs.PrimaryAction.AddBinding(InputNode.Key(Key.Space), null, null, 0);
-                            anchorLocomotionInputs.PrimaryAxis.AddBinding(InputNode.Axis(InputNode.Key(Key.W), InputNode.Key(Key.A), InputNode.Key(Key.S), InputNode.Key(Key.D)), null, null, 0);
-                            anchorLocomotionInputs.SecondaryAction.AddBinding(InputNode.Key(Key.RightControl), null, null, 0);
+                            anchorLocomotionInputs.PrimaryAction.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)), null, null, 0);
+                            anchorLocomotionInputs.PrimaryAxis.AddBinding(InputNode.Axis(InputNode.Key(Config.GetValue(KEY_FORWARD)), InputNode.Key(Key.A), InputNode.Key(Key.S), InputNode.Key(Key.D)), null, null, 0);
+                            anchorLocomotionInputs.SecondaryAction.AddBinding(InputNode.Key(Config.GetValue(ANCHOR_LOCOMOTION_SECONDARY)), null, null, 0);
                             anchorLocomotionInputs.SecondaryAxis.AddBinding(InputNode.Axis(InputNode.Key(Key.UpArrow), InputNode.Key(Key.LeftArrow), InputNode.Key(Key.DownArrow), InputNode.Key(Key.RightArrow)), null, null, 0);
                             return;
                         }
@@ -433,8 +415,8 @@ namespace ResoniteKeybinds {
                         DevToolInputs devToolInputs = group as DevToolInputs;
                         if (devToolInputs != null)
                         {
-                            devToolInputs.Focus.AddBinding(InputNode.PrimarySecondary<bool>(InputNode.Key(Key.F), null), null, null, 0);
-                            devToolInputs.Inspector.AddBinding(InputNode.PrimarySecondary<bool>(InputNode.Key(Key.I), null), null, null, 0);
+                            devToolInputs.Focus.AddBinding(InputNode.PrimarySecondary<bool>(InputNode.Key(Config.GetValue(DEV_TOOL_FOCUS)), null), null, null, 0);
+                            devToolInputs.Inspector.AddBinding(InputNode.PrimarySecondary<bool>(InputNode.Key(Config.GetValue(DEV_TOOL_INSPECTOR)), null), null, null, 0);
                             return;
                         }
 

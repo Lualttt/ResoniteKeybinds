@@ -390,7 +390,7 @@ namespace ResoniteKeybinds {
                         AnchorLocomotionInputs anchorLocomotionInputs = group as AnchorLocomotionInputs;
                         if (anchorLocomotionInputs != null)
                         {
-                            anchorLocomotionInputs.PrimaryAction.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)), null, null, 0);
+                            anchorLocomotionInputs.PrimaryAction.AddBinding(InputNode.Key(Config.GetValue(KEY_JUMP)), null, null, 0);
                             anchorLocomotionInputs.PrimaryAxis.AddBinding(InputNode.Axis(InputNode.Key(Config.GetValue(KEY_FORWARD)), InputNode.Key(Key.A), InputNode.Key(Key.S), InputNode.Key(Key.D)), null, null, 0);
                             anchorLocomotionInputs.SecondaryAction.AddBinding(InputNode.Key(Config.GetValue(ANCHOR_LOCOMOTION_SECONDARY)), null, null, 0);
                             anchorLocomotionInputs.SecondaryAxis.AddBinding(InputNode.Axis(InputNode.Key(Key.UpArrow), InputNode.Key(Key.LeftArrow), InputNode.Key(Key.DownArrow), InputNode.Key(Key.RightArrow)), null, null, 0);

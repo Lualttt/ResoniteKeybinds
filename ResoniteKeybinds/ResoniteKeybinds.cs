@@ -1,7 +1,5 @@
 using HarmonyLib;
 using ResoniteModLoader;
-using System;
-using System.Reflection;
 using Elements.Core;
 using FrooxEngine;
 using FrooxEngine.CommonAvatar;
@@ -134,15 +132,9 @@ namespace ResoniteKeybinds {
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> SCREEN_UNFOCUS_GATE = new ModConfigurationKey<Key>("screenUnfocusGate", "Unfocus (gate)", () => Key.Alt);
 
+        // so many controls oml, also hi :3
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<dummy> DUMMY_SPACER8 = new ModConfigurationKey<dummy>("        ", "");
-
-        // Head (so many controls oml, also hi :3)
-        [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<Key> HEAD_CROUCH = new ModConfigurationKey<Key>("headCrouch", "Crouch", () => Key.C);
-
-        [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER9 = new ModConfigurationKey<dummy>("         ", "");
 
         // General Locomotion
         [AutoRegisterConfigKey]
@@ -151,21 +143,14 @@ namespace ResoniteKeybinds {
         private static readonly ModConfigurationKey<Key> GENERAL_LOCOMOTION_PREVIOUS = new ModConfigurationKey<Key>("generalLocomotionPrevious", "Previous Module", () => Key.PageDown);
 
         [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER10 = new ModConfigurationKey<dummy>("          ", "");
-
-        // Smooth Locomotion
-        [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<Key> SMOOTH_LOCOMOTION_JUMP = new ModConfigurationKey<Key>("smoothLocomotionJump", "Jump", () => Key.Space);
-
-        [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER11 = new ModConfigurationKey<dummy>("           ", "");
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER9 = new ModConfigurationKey<dummy>("         ", "");
 
         // Anchor Locomotion
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<Key> ANCHOR_LOCOMOTION_SECONDARY = new ModConfigurationKey<Key>("ancholLocomotionSecondary", "Anchor Lomocotion Secondary Action", () => Key.RightControl);
 
         [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER12 = new ModConfigurationKey<dummy>("            ", "");
+        private static readonly ModConfigurationKey<dummy> DUMMY_SPACER10 = new ModConfigurationKey<dummy>("          ", "");
 
         // Dev Tool
         [AutoRegisterConfigKey]
@@ -363,8 +348,8 @@ namespace ResoniteKeybinds {
                         {
                             headInputs.Crouch.AddBinding(InputNode.Any(new IInputNode<bool>[]
                             {
-                               InputNode.Key(Config.GetValue(HEAD_CROUCH)),
-                               InputNode.Key(Config.GetValue(HEAD_CROUCH)).TapToggle(0.15f)
+                               InputNode.Key(Config.GetValue(KEY_CROUCH)),
+                               InputNode.Key(Config.GetValue(KEY_CROUCH)).TapToggle(0.15f)
                             }).ToAnalog(4f, CurvePreset.Smooth), null, null, 0);
                             return;
                         }
@@ -382,7 +367,7 @@ namespace ResoniteKeybinds {
                         if (smoothLocomotionInputs != null)
                         {
                             smoothLocomotionInputs.Move.AddBinding(ResoniteKeybinds.GenerateScreenLocomotionDirection(null, null, null), null, null, 0);
-                            smoothLocomotionInputs.Jump.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)), null, null, 0);
+                            smoothLocomotionInputs.Jump.AddBinding(InputNode.Key(Config.GetValue(KEY_JUMP)), null, null, 0);
                             return;
                         }
 
@@ -390,15 +375,15 @@ namespace ResoniteKeybinds {
                         if (smoothThreeAxisLocomotionInputs != null)
                         {
                             smoothThreeAxisLocomotionInputs.Move.AddBinding(ResoniteKeybinds.GenerateScreenLocomotionDirection(null, null, null), null, null, 0);
-                            smoothThreeAxisLocomotionInputs.Jump.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)), null, null, 0);
+                            smoothThreeAxisLocomotionInputs.Jump.AddBinding(InputNode.Key(Config.GetValue(KEY_JUMP)), null, null, 0);
                             return;
                         }
 
                         AnchorReleaseInputs anchorReleaseInputs = group as AnchorReleaseInputs;
                         if (anchorReleaseInputs != null)
                         {
-                            anchorReleaseInputs.Release.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)), null, null, 0);
-                            anchorReleaseInputs.ReleaseStrength.AddBinding(InputNode.Key(Config.GetValue(SMOOTH_LOCOMOTION_JUMP)).ToAnalog(4f, CurvePreset.Smooth), null, null, 0);
+                            anchorReleaseInputs.Release.AddBinding(InputNode.Key(Config.GetValue(KEY_JUMP)), null, null, 0);
+                            anchorReleaseInputs.ReleaseStrength.AddBinding(InputNode.Key(Config.GetValue(KEY_JUMP)).ToAnalog(4f, CurvePreset.Smooth), null, null, 0);
                             return;
                         }
 
